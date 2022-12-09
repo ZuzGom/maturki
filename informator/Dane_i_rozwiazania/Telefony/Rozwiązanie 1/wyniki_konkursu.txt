@@ -1,0 +1,19 @@
+Punkt (a):
+Tak: 1121
+Nie: 879
+Punkt (b):
+Liczba numerow w grupie 5: 576
+Liczba numerow w grupie 6: 480
+Liczba numerow w grupie 7: 548
+Liczba numerow w grupie 8: 396
+Punkt (c):
+Numer telefonu: 899787939
+Suma cyfr: 69
+Punkt (d):
+Numery telefonow:
+876432597
+876321999
+754321189
+Dlugosc: 6
+Punkt (e):
+Liczba sms-ow: 35

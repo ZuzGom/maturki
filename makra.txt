@@ -1,0 +1,163 @@
+Sub test()
+'
+' test Makro
+'
+Dim w As Long
+Dim wiersze As Long
+'petla 2 - 161817
+wiersze = Range("a1").CurrentRegion.Rows.Count
+For w = 2 To wiersze
+
+
+CenaB = Range("I" & w)
+CenaN = Range("H" & w)
+
+Range("j" & w) = CenaB - CenaN
+If Range("j" & w) > 100 Then
+    Range("a" & w, "i" & w).Font.Color = vbRed
+    
+Else
+    Range("a" & w, "i" & w).Font.Color = vbGreen
+    
+End If
+
+
+Next w
+Range("J2:J" & wiersze).NumberFormat = "#,##0.00 $"
+'
+End Sub
+
+Dim Zakres As Range
+Set Zakres = Selection
+Zakres.Interior.Color = xlNone
+Zakres.SpecialCells(xlCellTypeBlanks).Interior.Color = vbRed
+End Sub
+
+Sub spis_arkuszy()
+  Const Spis = "Spis arkuszy"
+  
+  Dim sh As Worksheet
+  Dim w As Integer
+  
+  'przejscie do arkusza ze spisem i ewentualne jego utworzenie
+  On Error Resume Next
+  Worksheets(Spis).Select
+  If Err > 0 Then
+    Worksheets.Add Before:=Sheets(1)
+    ActiveSheet.Name = Spis
+  End If
+  On Error GoTo 0
+  
+  'wpisanie listy arkuszy
+  Cells.Clear
+  w = 0
+  For Each sh In Worksheets
+    w = w + 1
+    Cells(w, 1) = sh.Name
+  Next sh
+End Sub
+
+Sub data()
+'
+' data Makro
+'
+
+'
+    ActiveCell.FormulaR1C1 = "=TODAY()"
+    Range("C5", "B4").Select
+End Sub
+'Option Explicit
+Sub KopiujKomorki()
+'deklaracja zmiennej
+Dim varA As Integer
+
+varA = 5 'przypisanie wartosci
+
+MsgBox varA ^ 2 'okienko
+
+
+End Sub
+
+
+Sub nowa()
+Dim CenaBtutto As Double
+
+CenaBtutto = Range("c2")
+End Sub
+
+Sub cena()
+wiersze = Range("a1").CurrentRegion.Rows.Count
+For w = 2 To wiersze
+For i = 2 To 11
+
+If Sheets("cukier").Cells(w, 4) = Sheets("cennik").Cells(i, 1) Then
+Sheets("cukier").Cells(w, 5) = Sheets("cennik").Cells(i, 2)
+
+End If
+
+Next i
+
+Next w
+End Sub
+
+Sub rabaty()
+Dim suma As Integer
+Dim rabat As Double
+
+wiersze = Range("a1").CurrentRegion.Rows.Count
+For w = 2 To wiersze
+If Sheets("rabaty").Cells(w, 2) = Sheets("rabaty").Cells(w - 1, 2) Then
+suma = suma + Sheets("rabaty").Cells(w, 3)
+Else
+suma = Sheets("rabaty").Cells(w, 3)
+End If
+
+If suma >= 100 And suma < 1000 Then
+rabat = rabat + Sheets("rabaty").Cells(w, 3) * 0.05
+ElseIf suma >= 1000 And suma < 10000 Then
+rabat = rabat + Sheets("rabaty").Cells(w, 3) * 0.1
+ElseIf suma >= 10000 Then
+rabat = rabat + Sheets("rabaty").Cells(w, 3) * 0.2
+End If
+Next w
+Sheets("rabaty").Cells(2, 5) = rabat
+End Sub
+Sub ciag()
+wiersze = Range("a1").CurrentRegion.Rows.Count
+licznik = 0
+For w = 2 To wiersze
+If Sheets("woda").Cells(w, 2) < 10000 And Sheets("woda").Cells(w - 1, 2) >= 10000 Then
+licznik = 0
+End If
+If Sheets("woda").Cells(w, 2) >= 10000 Then
+licznik = licznik + 1
+End If
+
+Sheets("woda").Cells(w, 5) = licznik
+Next w
+
+End Sub
+
+Sub bilans()
+wiersze = Range("a1").CurrentRegion.Rows.Count
+For w = 2 To wiersze
+odlej = Application.WorksheetFunction.RoundUp(Sheets("woda").Cells(w - 1, 6) * 0.02, 0)
+If Sheets("woda").Cells(w - 1, 6) > 1000000 Then
+Sheets("woda").Cells(w, 6) = 1000000
+Else
+Sheets("woda").Cells(w, 6) = Sheets("woda").Cells(w - 1, 6)
+End If
+Sheets("woda").Cells(w, 6) = Sheets("woda").Cells(w, 6) + Sheets("woda").Cells(w, 2) - odlej
+
+Next w
+End Sub
+Sub jeśli_nie()
+wiersze = Range("a1").CurrentRegion.Rows.Count
+For w = 2 To wiersze
+odlej = Application.WorksheetFunction.RoundUp(Sheets("woda").Cells(w - 1, 8) * 0.02, 0)
+Sheets("woda").Cells(w, 8) = Sheets("woda").Cells(w - 1, 8) + Sheets("woda").Cells(w, 2) - odlej
+
+Next w
+
+End Sub
+

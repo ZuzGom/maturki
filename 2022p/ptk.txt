@@ -1,0 +1,14 @@
+Punkty Zuzi
+cz I
+1.1 2 ptk
+1.2 3 ptk
+
+2.1 1 ptk
+2.2 2 ptk
+2.3 0 ptk
+
+3.1 0 ptk
+3.2 1 ptk
+3.3 1 ptk
+
+suma: 10 ptk
